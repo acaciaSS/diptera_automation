@@ -190,7 +190,7 @@ essa espécie — ver o resumo impresso no Passo 3/4.
 ## Authors and Acknowledgments
 
 **Autor:**
-- [Teu Nome]
+- Acácia Santos LBINF nº202200054
 
 **Orientadores:**
 - Prof. Luís Filipe Lopes (IHMT)
@@ -200,16 +200,14 @@ essa espécie — ver o resumo impresso no Passo 3/4.
 
 ## License
 
-[A confirmar com o IHMT/ESTB — as imagens da coleção entomológica não são
-dados públicos; o código do pipeline pode ser licenciado separadamente,
-ex. MIT License, mas as imagens não devem ser redistribuídas sem autorização.]
+[]
 
 ---
 
 ## Citation
 
 ```text
-[Teu Nome] (2026).
+Acácia Santos  (2026).
 Identificação Automática de Larvas de Culicidae (Diptera) por Deep Learning.
 Relatório de Estágio, Licenciatura em Bioinformática, ESTB/IPS.
 Instituto de Higiene e Medicina Tropical, Universidade NOVA de Lisboa.
