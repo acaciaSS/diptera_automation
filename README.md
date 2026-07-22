@@ -44,8 +44,8 @@ O dataset principal é uma coleção de imagens microscópicas de larvas de mosq
 **Organismo:** Culicidae — 24 espécies dos géneros *Aedes*, *Anopheles*, *Culex* e *Culiseta*
 **Origem das imagens:** Coleção entomológica do IHMT (preparações permanentes em lâminas de vidro com meio de Berlese)
 **Equipamento:** Microscópio Olympus BX51, câmara digital Olympus SC30, software analySIS getIT
-**Ampliações:** Objetivas de 4×, 10× e 40×
-**Estruturas morfológicas fotografadas:** Cápsula cefálica (cab), segmento 8 (seg8), segmento anal (segAn), sifão respiratório (sif) — *Anopheles* não possui sifão
+**Ampliações:** Objetivas de 4x
+**Estruturas morfológicas fotografadas:** Cápsula cefálica (cab), segmento 8 (seg8), segmento anal (segAn), sifão respiratório (sif) 
 **Organização:** Uma pasta por espécime (`AutoID-[Género]-larva-[XXXX]`), dentro de uma pasta por espécie (`Género.espécie`)
 **Critério de inclusão no treino de espécie:** mínimo de 3 larvas (pastas AutoID) por espécie
 
