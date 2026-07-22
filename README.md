@@ -106,11 +106,11 @@ Correr os notebooks pela seguinte ordem:
 
 ```
 1. pre_processamento.ipynb
-2. diptera_estruturas_v3_3.ipynb   (Passo 1 ao Passo 10)
+2. diptera_estruturas.ipynb   (Passo 1 ao Passo 10)
 3. diptera_inference.ipynb         (sempre que for necessário identificar uma larva nova)
 ```
 
-No `diptera_estruturas_v3_3.ipynb`, correr todas as células por ordem, de cima para baixo. Ver a tabela de passos abaixo.
+No `diptera_estruturas.ipynb`, correr todas as células por ordem, de cima para baixo. Ver a tabela de passos abaixo.
 
 | Passo | O que faz |
 |---|---|
