@@ -3,33 +3,33 @@ Pipeline de identificação taxonómica automática (género e espécie) de larv
 
 ---
 
-## Table of Contents
-- Description of the Project
-- Dataset
-- Installation
-- Prerequisites
-- Expected Outputs
-- Usage
-- Run Specific Analyses
-- Configuration
-- Troubleshooting
-- Authors and Acknowledgments
-- License
-- Citation
+## Índice
+- Descrição do Projeto
+- Conjunto de Dados
+- Instalação
+- Pré-requisitos
+- Resultados Esperados
+- Utilização
+- Executar Análises Específicas
+- Configuração
+- Resolução de Problemas
+- Autores e Agradecimentos
+- Licença
+- Citação
 
 ---
 
-## Description of the Project
+## Descrição do Projeto
 
 Este projeto é o resultado de um estágio curricular da **Licenciatura em Bioinformática** (Escola Superior de Tecnologia do Barreiro / Instituto Politécnico de Setúbal), realizado no **Instituto de Higiene e Medicina Tropical (IHMT)**, Universidade NOVA de Lisboa.
 
-Os mosquitos (família Culicidae) incluem vetores de doenças com elevado impacto em saúde pública. A identificação taxonómica das suas larvas é tradicionalmente feita por observação morfológica ao microscópio, uma tarefa que exige treino especializado e é morosa. Este projeto explora a identificação automática de larvas a partir de imagens microscópicas de quatro estruturas morfológicas diagnósticas, usando *deep learning*.
+Os mosquitos (família Culicidae) incluem vetores de doenças com elevado impacto em saúde pública. A identificação taxonómica das suas larvas é tradicionalmente feita por observação morfológica ao microscópio, uma tarefa que exige treino especializado e é morosa. Este projeto explora a identificação automática de larvas a partir de imagens microscópicas de quatro estruturas morfológicas diagnósticas, usando aprendizagem profunda (*deep learning*).
 
 O objetivo principal foi construir um sistema de classificação **hierárquico em dois níveis** (género, e depois espécie dentro do género), com um modelo CNN independente por estrutura morfológica, combinado por votação ponderada. O pipeline:
 
 - Organiza as imagens da coleção entomológica do IHMT por estrutura morfológica, género e espécie
-- Treina, para cada estrutura, um modelo de género e um modelo de espécie por género (transfer learning com EfficientNetB0, fine-tuning)
-- Avalia cada modelo (classification report, matrizes de confusão, cobertura/accuracy seletiva)
+- Treina, para cada estrutura, um modelo de género e um modelo de espécie por género (aprendizagem por transferência com EfficientNetB0, com ajuste fino)
+- Avalia cada modelo (relatório de classificação, matrizes de confusão, cobertura/exatidão seletiva)
 - Deteta casos "desconhecidos" — larvas que não se assemelham a nenhuma classe vista no treino — através da distância no espaço de características da CNN
 - Disponibiliza uma ferramenta de identificação para utilizador final (interface web, Gradio)
 
@@ -37,7 +37,7 @@ Paralelamente, e sem contribuição direta para o pipeline de identificação de
 
 ---
 
-## Dataset
+## Conjunto de Dados
 
 O dataset principal é uma coleção de imagens microscópicas de larvas de mosquito, adquirida no âmbito deste estágio.
 
@@ -45,15 +45,15 @@ O dataset principal é uma coleção de imagens microscópicas de larvas de mosq
 **Origem das imagens:** Coleção entomológica do IHMT (preparações permanentes em lâminas de vidro com meio de Berlese)
 **Equipamento:** Microscópio Olympus BX51, câmara digital Olympus SC30, software analySIS getIT
 **Ampliações:** Objetivas de 4x
-**Estruturas morfológicas fotografadas:** Cápsula cefálica (cab), segmento 8 (seg8), segmento anal (segAn), sifão respiratório (sif) 
+**Estruturas morfológicas fotografadas:** Cápsula cefálica (cab), segmento 8 (seg8), segmento anal (segAn), sifão respiratório (sif)
 **Organização:** Uma pasta por espécime (`AutoID-[Género]-larva-[XXXX]`), dentro de uma pasta por espécie (`Género.espécie`)
 **Critério de inclusão no treino de espécie:** mínimo de 3 larvas (pastas AutoID) por espécie
 
-**Fonte:** Coleção entomológica do IHMT (dados não públicos; acesso apenas através da pasta partilhada do projeto no Google Drive)
+**Fonte:** Coleção entomológica do IHMT. Dataset completo disponibilizado publicamente no Zenodo: https://zenodo.org/records/23106324
 
 ---
 
-## Installation
+## Instalação
 
 Clonar o repositório:
 
@@ -62,7 +62,7 @@ git clone https://github.com/<utilizador>/diptera_automation.git
 cd diptera_automation
 ```
 
-Este projeto corre em notebooks Google Colab, pelo que não é necessário instalar um ambiente local — basta abrir os ficheiros `.ipynb` diretamente no Colab (`File > Upload notebook` ou a partir do Google Drive).
+Este projeto corre em notebooks Google Colab, pelo que não é necessário instalar um ambiente local — basta abrir os ficheiros `.ipynb` diretamente no Colab (`Ficheiro > Carregar notebook` ou a partir do Google Drive).
 
 Verificar acesso ao dataset:
 
@@ -72,7 +72,7 @@ MyDrive/Fotos-Micro/Fotos-Micro-512
 
 ---
 
-## Prerequisites
+## Pré-requisitos
 
 - **Conta Google** com acesso à pasta do dataset no Drive
 - **Google Colab** com *runtime* GPU (T4) — `Runtime > Change runtime type > T4 GPU`
@@ -80,7 +80,7 @@ MyDrive/Fotos-Micro/Fotos-Micro-512
 
 ---
 
-## Expected Outputs
+## Resultados Esperados
 
 Todos os outputs são guardados em `MyDrive/diptera_models/`.
 
@@ -100,14 +100,14 @@ Todos os outputs são guardados em `MyDrive/diptera_models/`.
 
 ---
 
-## Usage
+## Utilização
 
 Correr os notebooks pela seguinte ordem:
 
 ```
 1. pre_processamento.ipynb
 2. diptera_estruturas.ipynb   (Passo 1 ao Passo 10)
-3. diptera_inference.ipynb         (sempre que for necessário identificar uma larva nova)
+3. diptera_inference.ipynb    (sempre que for necessário identificar uma larva nova)
 ```
 
 No `diptera_estruturas.ipynb`, correr todas as células por ordem, de cima para baixo. Ver a tabela de passos abaixo.
@@ -130,9 +130,9 @@ No `diptera_estruturas.ipynb`, correr todas as células por ordem, de cima para 
 
 ---
 
-## Run Specific Analyses
+## Executar Análises Específicas
 
-Depois de correr o `diptera_estruturas_v3_3.ipynb` até ao Passo 9, é possível identificar uma larva nova sem repetir o treino, usando apenas o `diptera_inference.ipynb`:
+Depois de correr o `diptera_estruturas.ipynb` até ao Passo 9, é possível identificar uma larva nova sem repetir o treino, usando apenas o `diptera_inference.ipynb`:
 
 1. Abrir `diptera_inference.ipynb` no Colab
 2. Correr as células por ordem (liga ao Drive, instala o Gradio, carrega os modelos já guardados)
@@ -141,9 +141,9 @@ Depois de correr o `diptera_estruturas_v3_3.ipynb` até ao Passo 9, é possível
 
 ---
 
-## Configuration
+## Configuração
 
-Editar as constantes no **Passo 2** de `diptera_estruturas_v3_3.ipynb`:
+Editar as constantes no **Passo 2** de `diptera_estruturas.ipynb`:
 
 ```python
 DATASET_PATH = '/content/drive/MyDrive/Fotos-Micro/Fotos-Micro-512'
@@ -159,7 +159,7 @@ UNKNOWN_THRESHOLD = 0.55
 
 ---
 
-## Troubleshooting
+## Resolução de Problemas
 
 **Problema:** `OSError: [Errno 107] Transport endpoint is not connected`
 **Solução:**
@@ -187,28 +187,56 @@ essa espécie — ver o resumo impresso no Passo 3/4.
 
 ---
 
-## Authors and Acknowledgments
+## Autores e Agradecimentos
 
-**Autor:**
-- Acácia Santos LBINF nº202200054
+**Autora:**
+- Acácia Santos — LBINF nº202200054
 
 **Orientadores:**
 - Prof. Luís Filipe Lopes (IHMT)
 - Prof. Teresa Novo (IHMT)
+- Prof. Francisco Esteves (ESTB/IPS)
 
 ---
 
-## License
+## Licença
 
-[]
+Este projeto está licenciado sob a Licença MIT — ver abaixo.
+
+```
+MIT License
+
+Copyright (c) 2026 acaciaSS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 
 ---
 
-## Citation
+## Citação
 
 ```text
-Acácia Santos  (2026).
+Acácia Santos (2026).
 Identificação Automática de Larvas de Culicidae (Diptera) por Deep Learning.
-Relatório de Estágio, Licenciatura em Bioinformática, ESTB/IPS.
-Instituto de Higiene e Medicina Tropical, Universidade NOVA de Lisboa.
+Relatório de Estágio, Licenciatura em Bioinformática, Escola Superior de
+Tecnologia do Barreiro / Instituto Politécnico de Setúbal.
+Código: https://github.com/<utilizador>/diptera_automation
+Dataset: [DOI do Zenodo, assim que publicado]
 ```
